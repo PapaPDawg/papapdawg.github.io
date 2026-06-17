@@ -89,3 +89,17 @@ footer {
 footer a {
     color: #66b3ff;
 }
+
+.project-image {
+    height: 250px;
+    background: #111;
+    border: 2px dashed #333;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+    color: #777;
+}
