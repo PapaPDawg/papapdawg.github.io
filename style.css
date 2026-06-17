@@ -67,3 +67,11 @@ nav a:hover {
     border-radius: 12px;
     margin-bottom: 40px;
 }
+
+.project-card {
+    background-color: #222;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid #333;
+}
