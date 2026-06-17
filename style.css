@@ -42,8 +42,9 @@ nav a:hover {
 }
 
 .buttons {
-    margin-top: 20px;
-    margin-bottom: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .button {
@@ -74,4 +75,8 @@ nav a:hover {
     border-radius: 12px;
     margin-top: 20px;
     border: 1px solid #333;
+}
+
+.project-card p {
+    line-height: 1.6;
 }
