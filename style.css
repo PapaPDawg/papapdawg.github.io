@@ -39,3 +39,23 @@ nav a {
 nav a:hover {
     color: #66b3ff;
 }
+
+.buttons {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #66b3ff;
+    color: #111;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
