@@ -125,3 +125,21 @@ footer a {
     color: #66b3ff;
     font-size: 24px;
 }
+
+.loop-card {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.loop-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.loop-card p {
+    margin: 0;
+    color: #ccc;
+}
