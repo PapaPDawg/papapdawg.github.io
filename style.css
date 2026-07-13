@@ -1,26 +1,69 @@
+:root {
+    --background: #121512;
+    --surface: #1b211d;
+    --surface-dark: #101411;
+    --surface-hover: #232b25;
+
+    --text-primary: #f2eee4;
+    --text-secondary: #b9b8ae;
+    --text-muted: #7f857d;
+
+    --accent: #d5a85c;
+    --accent-hover: #e7bd72;
+    --accent-soft: rgba(213, 168, 92, 0.12);
+
+    --border: #343c35;
+}
+
 body {
-    background-color: #1b1b1b;
-    color: #f5f5f5;
-    font-family: Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: Arial, Helvetica, sans-serif;
     max-width: 1000px;
     margin: auto;
     padding: 40px;
+    line-height: 1.6;
 }
 
 h1 {
-    color: #ffffff;
+    color: var(--text-primary);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.05;
+    margin-top: 0;
+    margin-bottom: 18px;
+    letter-spacing: -0.04em;
 }
 
 h2 {
-    color: #d4d4d4;
+    color: var(--text-primary);
+    font-size: 1.7rem;
+    margin-top: 55px;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    color: var(--accent);
+}
+
+p,
+li {
+    color: var(--text-secondary);
+}
+
+strong {
+    color: var(--text-primary);
 }
 
 hr {
-    border: 1px solid #444;
+    border: 0;
+    height: 1px;
+    background-color: var(--border);
+    margin: 55px 0;
 }
 
 a {
-    color: #66b3ff;
+    color: var(--accent);
 }
 
 nav {
@@ -32,13 +75,13 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #f5f5f5;
-    font-weight: bold;
-    transition: 0.2s;
+    color: var(--text-secondary);
+    font-weight: 700;
+    transition: color 0.2s ease;
 }
 
 nav a:hover {
-    color: #66b3ff;
+    color: var(--accent-hover);
 }
 
 .buttons {
@@ -49,36 +92,38 @@ nav a:hover {
 
 .button {
     display: inline-block;
-    background-color: #66b3ff;
-    color: #111;
+    background-color: var(--accent);
+    color: var(--surface-dark);
     padding: 12px 20px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.2s;
+    font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .button:hover {
     transform: translateY(-2px);
+    background-color: var(--accent-hover);
 }
 
 .hero {
-    background-color: #222;
-    padding: 30px;
-    border-radius: 12px;
+    background-color: var(--surface);
+    padding: 36px;
+    border-radius: 16px;
     margin-bottom: 40px;
+    border: 1px solid var(--border);
 }
 
 .project-card {
-    background-color: #222;
-    padding: 25px;
-    border-radius: 12px;
+    background-color: var(--surface);
+    padding: 28px;
+    border-radius: 14px;
     margin-top: 20px;
-    border: 1px solid #333;
+    border: 1px solid var(--border);
 }
 
 .project-card p {
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 footer {
@@ -87,21 +132,21 @@ footer {
 }
 
 footer a {
-    color: #66b3ff;
+    color: var(--accent);
 }
 
 .project-image {
     height: 250px;
-    background: #111;
-    border: 2px dashed #333;
-    border-radius: 10px;
+    background-color: var(--surface-dark);
+    border: 2px dashed var(--border);
+    border-radius: 14px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     margin-bottom: 20px;
-    color: #777;
+    color: var(--text-muted);
 }
 
 .loop-steps {
@@ -112,26 +157,32 @@ footer a {
 }
 
 .loop-step {
-    background-color: #111;
-    border: 1px solid #333;
+    background-color: var(--surface-dark);
+    border: 1px solid var(--border);
     padding: 12px 20px;
     border-radius: 8px;
     width: 80%;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .loop-arrow {
-    color: #66b3ff;
+    color: var(--accent);
     font-size: 24px;
 }
 
 .loop-card {
-    background-color: #111;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 20px;
+    background-color: var(--surface-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
     margin-bottom: 15px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.loop-card:hover {
+    transform: translateY(-2px);
+    background-color: var(--surface-hover);
 }
 
 .loop-card h3 {
@@ -141,5 +192,57 @@ footer a {
 
 .loop-card p {
     margin: 0;
-    color: #ccc;
+    color: var(--text-secondary);
+}
+* {
+    box-sizing: border-box;
+}
+
+.project-card ul {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.project-card li {
+    margin-bottom: 10px;
+}
+
+.project-card li:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 22px;
+    }
+
+    nav {
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+    }
+
+    .hero {
+        padding: 24px;
+    }
+
+    .project-card {
+        padding: 22px;
+    }
+
+    .project-image {
+        height: 190px;
+    }
+
+    .loop-step {
+        width: 100%;
+    }
+
+    hr {
+        margin: 40px 0;
+    }
+
+    h2 {
+        margin-top: 40px;
+    }
 }
