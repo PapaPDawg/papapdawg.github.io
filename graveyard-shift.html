@@ -21,28 +21,32 @@
     <h1>Graveyard Shift</h1>
 
     <p>
-        A cozy graveyard management game about daily work routines,
-        relationships, and helping spirits move on.
+        A cozy narrative management game built in Unreal Engine 5 with a focus on
+        modular gameplay systems, event-driven architecture, and emotionally
+        driven storytelling.
     </p>
+    
 </div>
-
-<hr>
 
 <h2>Overview</h2>
 
 <div class="project-card">
-    <p>
-        Graveyard Shift is a cozy narrative management game built in Unreal Engine 5.
-        Players work the evening shift as a cemetery caretaker, balancing routine
-        maintenance with supernatural encounters and relationship-driven storytelling.
-    </p>
-    
-    <p>
-        The project emphasizes modular gameplay systems, event-driven architecture,
-        and emotionally paced progression. Each workday introduces new opportunities
-        to explore the cemetery, meet lingering spirits, and gradually uncover the
-        stories hidden among the graves.
-    </p>
+
+<p>
+    <strong>Graveyard Shift</strong> is a cozy narrative management game being
+    developed in Unreal Engine 5. Players work the evening shift as a cemetery
+    caretaker, balancing routine maintenance with supernatural encounters and
+    character-driven storytelling.
+</p>
+
+<p>
+    While the game focuses on emotionally reflective gameplay, the project also
+    serves as a demonstration of my gameplay programming philosophy: modular
+    systems, event-driven architecture, and clear ownership of gameplay
+    responsibilities. Rather than building isolated mechanics, each feature is
+    designed as a reusable system that can grow alongside the project.
+</p>
+
 </div>
 
 <hr>
@@ -67,10 +71,11 @@
     </div>
 
     <div class="loop-card">
-        <h3>Build Relationships</h3>
+        <h3>Explore the Cemetery</h3>
         <p>
-            Meet spirits, uncover their stories, and help them find peace
-            through conversation and repeated interactions.
+            Spend time exploring the cemetery after completing your work.
+            Future updates will introduce lingering spirits, narrative encounters,
+            and relationship-driven storylines.
         </p>
     </div>
 
@@ -97,10 +102,14 @@
 <h2>Features & Screenshots</h2>
 
 <div class="project-card">
-    <p>
-    Gameplay footage and development screenshots will be added as the vertical
-    slice reaches completion.
-    </p>
+
+<p>
+Current gameplay footage and screenshots will be added as development
+continues. The current vertical slice includes the complete workday
+gameplay loop, dialogue framework, chore systems, HUD, day progression,
+and the newly developed multi-level transition architecture.
+</p>
+
 </div>
 
 <hr>
@@ -109,32 +118,75 @@
 
 <div class="project-card">
     <ul>
-        <li>Tap / Hold / Talk interaction framework</li>
-        <li>Randomized daily chore generation</li>
-        <li>Dynamic grave state management</li>
-        <li>Reusable branching dialogue system</li>
-        <li>Dialogue-driven time and movement pausing</li>
-        <li>Multi-day progression system</li>
-        <li>Dynamic HUD and objective tracking</li>
-        <li>12-hour in-game clock with overtime events</li>
-        <li>Reusable iris transition system</li>
-        <li>Event-driven Grandma arrival architecture</li>
-        <li>Gate progression and day transition framework</li>
+        <li>Reusable Tap / Hold / Talk interaction framework</li>
+        <li>Randomized daily trash, weed, and grave-cleaning assignments</li>
+        <li>Dynamic grave state and completion tracking</li>
+        <li>Reusable branching dialogue system with interruption handling</li>
+        <li>Automatic time pausing and movement locking during dialogue</li>
+        <li>Multi-day work loop with daily pay and progression</li>
+        <li>Dynamic HUD with money, day, time, and objective tracking</li>
+        <li>12-hour in-game clock with overtime warning and automatic shift ending</li>
+        <li>Reusable material-driven iris transition system</li>
+        <li>Event dispatchers for animation-complete gameplay sequencing</li>
+        <li>Event-driven Grandma arrival and departure architecture</li>
+        <li>Cross-level transition between the graveyard and drive-home scene</li>
+        <li>Manager-based orchestration through BP_GrandmaDriveManager</li>
+        <li>Modular vehicle actor with player, Grandma, and camera attachment points</li>
+        <li>Stored actor references for clean manager-to-actor communication</li>
     </ul>
 </div>
 
+<hr>
+
+<h2>Engineering Highlights</h2>
+
+<div class="project-card">
+
+<ul>
+
+<li>
+Designed a manager-driven gameplay architecture that separates orchestration
+from actor behavior.
+</li>
+
+<li>
+Implemented event-driven Blueprint communication using dispatchers rather
+than timing-based delays.
+</li>
+
+<li>
+Developed reusable interaction, dialogue, HUD, and transition systems.
+</li>
+
+<li>
+Architected cross-level gameplay flow using dedicated transition levels and
+manager classes.
+</li>
+
+<li>
+Prioritized modular, maintainable systems before visual polish to support
+long-term scalability.
+</li>
+
+</ul>
+
+</div>
+    
 <hr>
 
 <h2>Roadmap</h2>
 
 <div class="project-card">
     <ul>
-        <li>Complete Grandma departure cutscene</li>
-        <li>Implement loading screen conversations</li>
-        <li>Build tutorial ghost encounter</li>
-        <li>Develop relationship & affinity system</li>
-        <li>Create additional ghost stories</li>
-        <li>Environmental art and visual polish</li>
+        <li>Complete persistent game-state transfer between levels</li>
+        <li>Finish the full graveyard → drive home → next day gameplay loop</li>
+        <li>Attach the player and Grandma to the vehicle sequence</li>
+        <li>Build the Drive Home scene with camera and environment systems</li>
+        <li>Implement Grandma’s reflective between-day conversations</li>
+        <li>Create the tutorial ghost encounter</li>
+        <li>Develop the relationship and affinity framework</li>
+        <li>Add additional ghost stories and narrative events</li>
+        <li>Begin environmental art, audio, and visual polish</li>
     </ul>
 </div>
 
