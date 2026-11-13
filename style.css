@@ -45,7 +45,13 @@ body {
     margin: 0 auto;
     padding: 40px;
 
-    background-color: var(--background);
+    background: linear-gradient(
+    135deg,
+    #394550 0%,
+    #29323B 45%,
+    #20252B 100%
+);
+   
     color: var(--text-primary);
 
     font-family: Arial, Helvetica, sans-serif;
