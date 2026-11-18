@@ -21,11 +21,12 @@
     <h1>Graveyard Shift</h1>
 
     <p>
-        A cozy narrative management game built in Unreal Engine 5 with a focus on
-        modular gameplay systems, event-driven architecture, and emotionally
-        driven storytelling.
+        A cozy, melancholy relationship sim about working the night shift at a
+        cemetery, built in Unreal Engine 5 with modular, data-driven gameplay
+        systems.
     </p>
-    
+
+    <p><strong>Status:</strong> Active development (vertical slice). <em>Graveyard Shift</em> is a working title.</p>
 </div>
 
 <h2>Overview</h2>
@@ -33,18 +34,18 @@
 <div class="project-card">
 
 <p>
-    <strong>Graveyard Shift</strong> is a cozy narrative management game being
-    developed in Unreal Engine 5. Players work the evening shift as a cemetery
-    caretaker, balancing routine maintenance with supernatural encounters and
-    character-driven storytelling.
+    Players work the evening shift as a cemetery caretaker. Harold, the aging
+    groundskeeper, hands out the night's chores. The graveyard holds ghosts with
+    unfinished stories, and at the end of every shift Grandma picks the player up
+    for a quiet drive home. Those drives are a place to decompress and reflect
+    between heavier moments.
 </p>
 
 <p>
-    While the game focuses on emotionally reflective gameplay, the project also
-    serves as a demonstration of my gameplay programming philosophy: modular
-    systems, event-driven architecture, and clear ownership of gameplay
-    responsibilities. Rather than building isolated mechanics, each feature is
-    designed as a reusable system that can grow alongside the project.
+    The project is also a demonstration of how I build gameplay systems: clear
+    ownership of responsibilities, event-driven communication, and content kept
+    in data rather than hard-coded into actors. Each feature is built as a
+    reusable system that can grow with the game.
 </p>
 
 </div>
@@ -58,40 +59,40 @@
     <div class="loop-card">
         <h3>Start the Shift</h3>
         <p>
-            Check in with Harold and receive your responsibilities for the evening.
+            Talk to Harold. He introduces himself on the first night, then hands
+            out each night's randomized chores.
         </p>
     </div>
 
     <div class="loop-card">
         <h3>Maintain the Grounds</h3>
         <p>
-            Complete daily tasks such as removing trash, pulling weeds,
-            and cleaning neglected graves throughout the cemetery.
+            Pick up trash, pull weeds, and clean neglected graves across the
+            cemetery. Check in with Harold for a live progress report.
         </p>
     </div>
 
     <div class="loop-card">
-        <h3>Explore the Cemetery</h3>
+        <h3>Meet the Spirits</h3>
         <p>
-            Spend time exploring the cemetery after completing your work.
-            Future updates will introduce lingering spirits, narrative encounters,
-            and relationship-driven storylines.
+            Talk to the ghosts who linger in the cemetery. Each one has its own
+            relationship progress and story. Ghost encounters and story arcs are
+            currently in development.
         </p>
     </div>
 
     <div class="loop-card">
         <h3>Report Back</h3>
         <p>
-            Return to Harold to review your progress, complete assignments,
-            and collect your pay.
+            Return to Harold when the work is done and collect your pay.
         </p>
     </div>
 
     <div class="loop-card">
-        <h3>End the Day</h3>
+        <h3>The Drive Home</h3>
         <p>
-            Once Grandma arrives, leave the cemetery, reflect on the night's events
-            during the drive home, and prepare for the next shift.
+            When Grandma arrives, leave through the gate for the drive home, then
+            return for the next night's shift.
         </p>
     </div>
 
@@ -104,36 +105,107 @@
 <div class="project-card">
 
 <p>
-Current gameplay footage and screenshots will be added as development
-continues. The current vertical slice includes the complete workday
-gameplay loop, dialogue framework, chore systems, HUD, day progression,
-and the newly developed multi-level transition architecture.
+Gameplay footage and screenshots will be added as development continues. The
+current vertical slice includes the full workday loop, a data-driven dialogue
+system, randomized chores, a 12-hour clock, multi-day progression, ghost
+affinity, and level transitions between the graveyard and the drive home.
 </p>
 
 </div>
 
 <hr>
 
-<h2>Systems</h2>
+<h2>System Breakdowns</h2>
 
 <div class="project-card">
-    <ul>
-        <li>Reusable Tap / Hold / Talk interaction framework</li>
-        <li>Randomized daily trash, weed, and grave-cleaning assignments</li>
-        <li>Dynamic grave state and completion tracking</li>
-        <li>Reusable branching dialogue system with interruption handling</li>
-        <li>Automatic time pausing and movement locking during dialogue</li>
-        <li>Multi-day work loop with daily pay and progression</li>
-        <li>Dynamic HUD with money, day, time, and objective tracking</li>
-        <li>12-hour in-game clock with overtime warning and automatic shift ending</li>
-        <li>Reusable material-driven iris transition system</li>
-        <li>Event dispatchers for animation-complete gameplay sequencing</li>
-        <li>Event-driven Grandma arrival and departure architecture</li>
-        <li>Cross-level transition between the graveyard and drive-home scene</li>
-        <li>Manager-based orchestration through BP_GrandmaDriveManager</li>
-        <li>Modular vehicle actor with player, Grandma, and camera attachment points</li>
-        <li>Stored actor references for clean manager-to-actor communication</li>
-    </ul>
+
+    <div class="loop-card">
+        <h3>Data-Driven Dialogue System</h3>
+
+        <p>
+            <strong>Problem:</strong> The first dialogue system was built around
+            one character. Lines lived on the actors placed in the level, and the
+            controller cast to one specific NPC class. Two problems came out of
+            that. A per-instance override on one placed actor quietly blanked a
+            line of dialogue. And when the controller started casting to a living-NPC
+            class, ghosts silently lost the ability to talk.
+        </p>
+
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>A reusable dialogue component owns the whole conversation lifecycle: selection, line advancement, time pausing, movement locking, and cleanup.</li>
+            <li>Each speaker's content lives in a Data Asset. Entries carry conditions: minimum day, minimum affinity, play-once, and priority.</li>
+            <li>A Gameplay Tag <em>Context</em> lets situation-driven characters request a kind of conversation, such as Harold asking for "Progress." The selector then picks the best matching entry for the current day.</li>
+            <li>Runtime lines, like live chore counts, are added after an entry's own lines without changing the asset.</li>
+            <li>An end-of-dialogue event dispatcher reports which conversation ended and whether it was finished. The speaker reacts by assigning chores or paying the player.</li>
+            <li>Completed play-once conversations are stored in the Game Instance, so they stay completed across level changes.</li>
+        </ul>
+
+        <p>
+            <strong>Debugging highlight:</strong> After the migration, Harold never
+            started the chores even though the assignment conversation finished.
+            Step-by-step checks showed the event was firing but always reported
+            "not completed." The cause was a member variable that shared its name
+            with the function's input. The dispatcher was reading the variable
+            instead of the real value.
+        </p>
+
+        <p>
+            <strong>Result:</strong> Any actor with the component can talk, with
+            no casts to specific classes. A new character needs one Data Asset and
+            one component. Harold's entire workday (intro, assignment, progress,
+            payment) runs on this system.
+        </p>
+    </div>
+
+    <div class="loop-card">
+        <h3>Randomized Daily Chores</h3>
+
+        <p>
+            <strong>Problem:</strong> Each night needed a different amount of
+            work in different places, without the same spot being used twice.
+        </p>
+
+        <ul>
+            <li>A chore manager rolls a random count for trash, weeds, and dirty graves at the start of each day.</li>
+            <li>Spawn points are shuffled and then picked by loop index, which guarantees unique locations. Random-index picking had caused duplicates.</li>
+            <li>Graves already exist in the world. Instead of spawning anything, selected graves switch to a dirty state that the player can interact with.</li>
+            <li>One progress function reports totals and completed counts to anything that needs them, including Harold's live progress lines.</li>
+            <li>Chores are assigned when Harold's assignment conversation completes, and they regenerate each new day.</li>
+        </ul>
+    </div>
+
+    <div class="loop-card">
+        <h3>Ghost Affinity and Persistence</h3>
+
+        <p>
+            <strong>Problem:</strong> Every ghost needs its own relationship
+            value. The tutorial ghost's progress has to reflect the player's
+            progress with every other ghost.
+        </p>
+
+        <ul>
+            <li>A shared ghost parent class owns affinity, with changes clamped to 0–100, so each child ghost holds its own independent value.</li>
+            <li>An affinity-changed dispatcher announces every change without tying the ghost to any particular UI, dialogue, or story system.</li>
+            <li>The tutorial ghost listens to every other ghost's dispatcher and recalculates its own affinity as their average. It can only reach 100% once every other ghost has.</li>
+            <li>Each ghost has a stable ID. Affinity is saved to and restored from the Game Instance, with a "found" flag that separates "saved at zero" from "never saved."</li>
+        </ul>
+    </div>
+
+    <div class="loop-card">
+        <h3>Other Systems</h3>
+        <ul>
+            <li>Tap / Hold / Talk interaction framework, with each input phase handling a specific interaction type</li>
+            <li>12-hour in-game clock with an overtime warning and automatic end of shift</li>
+            <li>Multi-day loop with daily pay and money that persists between levels</li>
+            <li>Material-driven iris transition with fade-complete event dispatchers</li>
+            <li>Cross-level flow between the graveyard and a dedicated drive-home level, orchestrated by a drive manager</li>
+            <li>Modular vehicle actor with seat and camera attachment points</li>
+        </ul>
+    </div>
+
 </div>
 
 <hr>
@@ -145,48 +217,47 @@ and the newly developed multi-level transition architecture.
 <ul>
 
 <li>
-Designed a manager-driven gameplay architecture that separates orchestration
-from actor behavior.
+Content lives in data (Data Assets and Gameplay Tags), so new characters and
+conversations don't need new Blueprint logic.
 </li>
 
 <li>
-Implemented event-driven Blueprint communication using dispatchers rather
-than timing-based delays.
+Components and event dispatchers replace class-specific casts and timing-based
+delays.
 </li>
 
 <li>
-Developed reusable interaction, dialogue, HUD, and transition systems.
+Each system has a clear owner. For example, the chore manager owns chore data,
+Harold decides what to say, and the dialogue component handles how it's said.
 </li>
 
 <li>
-Architected cross-level gameplay flow using dedicated transition levels and
-manager classes.
+Game state that must survive level changes lives in the Game Instance.
 </li>
 
 <li>
-Prioritized modular, maintainable systems before visual polish to support
-long-term scalability.
+I debug step by step and keep a dated development changelog that records
+each problem, its cause, the fix, and the result.
 </li>
 
 </ul>
 
 </div>
-    
+
 <hr>
 
 <h2>Roadmap</h2>
 
 <div class="project-card">
     <ul>
-        <li>Complete persistent game-state transfer between levels</li>
-        <li>Finish the full graveyard → drive home → next day gameplay loop</li>
-        <li>Attach the player and Grandma to the vehicle sequence</li>
-        <li>Build the Drive Home scene with camera and environment systems</li>
-        <li>Implement Grandma’s reflective between-day conversations</li>
-        <li>Create the tutorial ghost encounter</li>
-        <li>Develop the relationship and affinity framework</li>
-        <li>Add additional ghost stories and narrative events</li>
-        <li>Begin environmental art, audio, and visual polish</li>
+        <li>Verify the full multi-day loop and persistence across level changes</li>
+        <li>Clipboard checklist that replaces the HUD chore tracker, for a cleaner, less UI-heavy screen</li>
+        <li>Tutorial ghost encounter that introduces the supernatural side of the game</li>
+        <li>First complete ghost story with affinity thresholds and story stages</li>
+        <li>Grandma's drive-home conversations that respond to the player's progress</li>
+        <li>Permanent save and load</li>
+        <li>A polished three-night demo</li>
+        <li>Environment art, lighting, and audio for the demo area</li>
     </ul>
 </div>
 
